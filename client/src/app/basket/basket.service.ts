@@ -48,18 +48,19 @@ export class BasketService {
     this.setBasket(basket); // отправляем post-запрос на сервер с новой преобразованной корзиной
   }
 
-  removeItemFromBasket(id: number, quantity = 1){
+  removeItemFromBasket(id: number, quantity: number){
     const basket = this.getCurrentBasketValue();
     if (!basket) return;
     const item = basket.items.find(x => x.id === id);
     if (item) {
       item.quantity -= quantity;
-      if (item.quantity = 0) {
+      if (item.quantity === 0) { 
         basket.items = basket.items.filter(x => x.id !== id);
+        console.log(basket.items);
       }
       if (basket.items.length > 0) this.setBasket(basket);
       else this.deleteBasket(basket);
-    }
+    } 
   }
 
   deleteBasket(basket: Basket){

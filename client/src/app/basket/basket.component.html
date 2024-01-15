@@ -34,7 +34,7 @@
                                 <td class="align-middle"><strong>{{item.price | currency}}</strong></td>
                                 <td class="align-middle">
                                     <div class="d-flex align-items-center">
-                                        <i (click)="removeItem(item.id)" class="fa fa-minus-circle text-warning me-2" style="cursor: pointer; font-size: 2em;"></i>
+                                        <i (click)="removeItem(item.id, 1)" class="fa fa-minus-circle text-warning me-2" style="cursor: pointer; font-size: 2em;"></i>
                                         <strong style="font-size: 0.5em;">{{item.quantity}}</strong>
                                         <i (click)="incrementQuantity(item)" class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
                                     </div>
