@@ -22,7 +22,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
     HttpClientModule,
     CoreModule,
     HomeModule,
-    ContactModule,
+    ContactModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
