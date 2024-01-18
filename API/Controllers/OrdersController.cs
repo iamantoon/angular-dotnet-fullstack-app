@@ -1,25 +1,21 @@
+using API.Dtos;
+using API.Errors;
+using API.Extensions;
+using AutoMapper;
 using Core.Entities.OrderAggregate;
 using Core.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using API.Dtos;
-using AutoMapper;
-using System.Security.Claims;
-using API.Extensions;
-using API.Errors;
-using Infrastructure.Services;
 
 namespace API.Controllers
 {
-    [Authorize]
     public class OrdersController : BaseApiController
     {
         private readonly IOrderService _orderService;
         private readonly IMapper _mapper;
         public OrdersController(IOrderService orderService, IMapper mapper)
         {
-            _orderService = orderService;
             _mapper = mapper;
+            _orderService = orderService;
         }
 
         [HttpPost]
@@ -39,7 +35,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<OrderToReturnDto>>> GetOrdersForUser()
         {
-            var email = HttpContext.User.RetrieveEmailFromPrincipal();
+            var email = User.RetrieveEmailFromPrincipal();
 
             var orders = await _orderService.GetOrdersForUserAsync(email);
 
@@ -49,7 +45,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderToReturnDto>> GetOrderByIdForUser(int id)
         {
-            var email = HttpContext.User.RetrieveEmailFromPrincipal();
+            var email = User.RetrieveEmailFromPrincipal();
 
             var order = await _orderService.GetOrderByIdAsync(id, email);
 
@@ -63,5 +59,5 @@ namespace API.Controllers
         {
             return Ok(await _orderService.GetDeliveryMethodsAsync());
         }
-    }    
+    }
 }
