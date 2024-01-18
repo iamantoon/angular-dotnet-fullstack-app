@@ -20,6 +20,12 @@ const routes: Routes = [
     loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutModule)
   },
   {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
+  {
+    path: 'orders', 
+    loadChildren: () => import('./orders/order.module').then(m => m.OrderModule),
+    canActivate: [AuthGuard],
+    data: { breadcrumb: 'Orders' }
+  },
   {path: 'contact', component: ContactComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
